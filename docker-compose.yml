@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  # -------------------------------
+  # NODE 3: DATABASE
+  # -------------------------------
+  database_node:
+    image: mysql:8.0
+    container_name: node3_database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword123 # Ganti dengan password aman
+      MYSQL_DATABASE: sekolah_db # Nama database
+      MYSQL_USER: user_aplikasi # User untuk Backend nanti
+      MYSQL_PASSWORD: userpassword123 # Password untuk Backend
+    volumes:
+      # 1. Persistensi Data: Agar data tidak hilang saat container dimatikan
+      - mysql_data:/var/lib/mysql
+      # 2. Auto Import: Script SQL tadi akan dijalankan otomatis saat start pertama
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app_network
+    ports:
+      - "3307:3306" # Mapping ke 3307 di host agar tidak bentrok jika ada mysql lain
+
+  # -------------------------------
+  # NODE 2: BACKEND (Akan datang)
+  # -------------------------------
+  # backend_node:
+  #   ... nanti kita isi di tahap selanjutnya ...
+  #   networks:
+  #     - app_network
+  #   depends_on:
+  #     - database_node
+
+networks:
+  # Ini adalah "Kabel LAN virtual" yang menghubungkan semua Node
+  app_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
