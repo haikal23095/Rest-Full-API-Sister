@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  # Nama service, bisa apa saja
+  db_mysql:
+    # Menggunakan image resmi MySQL versi 8
+    image: mysql:8.0
+
+    # Memberi nama container agar mudah diidentifikasi
+    container_name: my_mysql_container
+
+    # Akan restart otomatis kecuali jika kita stop manual
+    restart: unless-stopped
+
+    # Variabel lingkungan untuk setup MySQL
+    # WAJIB diubah sesuai kebutuhan Anda
+    environment:
+      MYSQL_ROOT_PASSWORD: "admin_123" # GANTI DENGAN PASSWORD ANDA
+      MYSQL_DATABASE: "manajemen-sekolah" # Database yang akan dibuat otomatis
+      MYSQL_USER: "admin" # User baru (opsional, tapi bagus)
+      MYSQL_PASSWORD: "admin_123" # Password user baru (opsional)
+
+    # Mapping port
+    # Port 3306 di host akan terhubung ke port 3306 di container
+    ports:
+      - "3306:3306"
+
+    # Volume untuk persistensi data
+    # Data database akan tersimpan di volume 'mysql-data'
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+# Mendefinisikan named volume
+volumes:
+  mysql-data:
+    driver: local
