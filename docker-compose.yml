@@ -41,6 +41,7 @@ services:
       - DB_USER=user_aplikasi
       - DB_PASSWORD=userpassword123
       - DB_NAME=sekolah_db
+      - JWT_SECRET=rahasia_super_aman_sister_project_2024
     networks:
       - app_network
     depends_on:
