@@ -22,16 +22,30 @@ services:
       - app_network
     ports:
       - "3307:3306" # Mapping ke 3307 di host agar tidak bentrok jika ada mysql lain
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   # -------------------------------
   # NODE 2: BACKEND (Akan datang)
   # -------------------------------
-  # backend_node:
-  #   ... nanti kita isi di tahap selanjutnya ...
-  #   networks:
-  #     - app_network
-  #   depends_on:
-  #     - database_node
+  backend_node:
+    build: ./backend
+    container_name: node2_backend
+    restart: always
+    ports:
+      - "4000:3000"
+    environment:
+      - DB_HOST=database_node
+      - DB_USER=user_aplikasi
+      - DB_PASSWORD=userpassword123
+      - DB_NAME=sekolah_db
+    networks:
+      - app_network
+    depends_on:
+      database_node:
+        condition: service_healthy
 
 networks:
   # Ini adalah "Kabel LAN virtual" yang menghubungkan semua Node

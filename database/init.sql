@@ -230,3 +230,24 @@ INSERT INTO nilai (nilai_id, murid_id, subject, nilai, guru_id) VALUES
 (18, 18, 'Kewirausahaan', 93, 18),
 (19, 19, 'Akuntansi', 75, 19),
 (20, 20, 'Antropologi', 82, 20);
+
+-- --------------------------------------------------------
+-- TABEL USERS (BARU)
+-- --------------------------------------------------------
+
+CREATE TABLE users (
+  id_user INT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  role ENUM('1', '2') NOT NULL DEFAULT '2', -- 1 = Admin, 2 = User Biasa
+  PRIMARY KEY (id_user)
+) ENGINE=InnoDB;
+
+-- 
+-- Insert Data Dummy User
+-- Password asli: "admin123"
+-- Kita masukkan hash-nya langsung (ini hasil dari bcrypt untuk "admin123")
+--
+INSERT INTO users (username, password, role) VALUES 
+('admin', '$2b$10$YourHashedPasswordHereWillBeGeneratedByNodeJS', '1');
+-- Catatan: Nanti kita buat user lewat API Register saja agar hash-nya valid.
