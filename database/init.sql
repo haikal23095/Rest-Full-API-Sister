@@ -105,131 +105,114 @@ CREATE TABLE nilai (
 -- Data untuk tabel `kelas` (20 data)
 --
 INSERT INTO kelas (kelas_id, nama_kelas, grade_level) VALUES
-(1, '10-A', '10'),
-(2, '10-B', '10'),
-(3, '10-C', '10'),
-(4, '10-D', '10'),
-(5, '11-IPA-1', '11'),
-(6, '11-IPA-2', '11'),
-(7, '11-IPS-1', '11'),
-(8, '11-IPS-2', '11'),
-(9, '12-IPA-1', '12'),
-(10, '12-IPA-2', '12'),
-(11, '12-IPS-1', '12'),
-(12, '12-IPS-2', '12'),
-(13, '10-E', '10'),
-(14, '10-F', '10'),
-(15, '11-IPA-3', '11'),
-(16, '11-IPS-3', '11'),
-(17, '12-IPA-3', '12'),
-(18, '12-IPS-3', '12'),
-(19, '10-G', '10'),
-(20, '11-Bahasa', '11');
+(1, '1-A', '1'), (2, '1-B', '1'),
+(3, '2-A', '2'), (4, '2-B', '2'),
+(5, '3-A', '3'), (6, '3-B', '3'),
+(7, '4-A', '4'), (8, '4-B', '4'),
+(9, '5-A', '5'), (10, '5-B', '5'),
+(11, '6-A', '6'), (12, '6-B', '6');
 
 --
 -- Data untuk tabel `guru` (20 data)
 -- `kelas_id` adalah FK untuk wali kelas, kita buat 1-to-1 dengan kelas 1-20
 --
 INSERT INTO guru (guru_id, nama_guru, nip, subject, kelas_id) VALUES
-(1, 'Budi Santoso', '198001012005011001', 'Matematika', 1),
-(2, 'Ani Yudhoyono', '198202022006022002', 'Fisika', 2),
-(3, 'Candra Wijaya', '198503032008031003', 'Kimia', 3),
-(4, 'Dewi Lestari', '198304042007042004', 'Biologi', 4),
-(5, 'Eka Prasetya', '199005052010051005', 'Bahasa Indonesia', 5),
-(6, 'Fajar Nugroho', '198806062009061006', 'Bahasa Inggris', 6),
-(7, 'Gita Permata', '199207072012072007', 'Sejarah', 7),
-(8, 'Haris Maulana', '198708082011081008', 'Geografi', 8),
-(9, 'Indah Cahyani', '199109092013092009', 'Ekonomi', 9),
-(10, 'Jaya Kusuma', '198610102010101010', 'Sosiologi', 10),
-(11, 'Kiki Amelia', '199311112015112011', 'PKN', 11),
-(12, 'Lintang Wibowo', '198912122014121012', 'Seni Budaya', 12),
-(13, 'Mega Mendung', '198401132009012013', 'Olahraga', 13),
-(14, 'Nina Kirana', '199402142016022014', 'TIK', 14),
-(15, 'Oscar Pranata', '198103152006031015', 'Bahasa Arab', 15),
-(16, 'Putri Handayani', '199504162017042016', 'Bahasa Mandarin', 16),
-(17, 'Qorri As-Sidiq', '198005172005051017', 'Bahasa Jepang', 17),
-(18, 'Rama Wijaya', '199606182018061018', 'Kewirausahaan', 18),
-(19, 'Sinta Dewi', '198307192007072019', 'Akuntansi', 19),
-(20, 'Tora Sudiro', '199008202012081020', 'Antropologi', 20);
+-- Guru Kelas (Wali Kelas)
+(1, 'Ibu Aisah', '19800101', 'Guru Kelas 1', 1),
+(2, 'Pak Budi', '19800102', 'Guru Kelas 1', 2),
+(3, 'Ibu Citra', '19800103', 'Guru Kelas 2', 3),
+(4, 'Pak Dani', '19800104', 'Guru Kelas 2', 4),
+(5, 'Ibu Elly', '19800105', 'Guru Kelas 3', 5),
+(6, 'Pak Feri', '19800106', 'Guru Kelas 3', 6),
+(7, 'Ibu Gina', '19800107', 'Guru Kelas 4', 7),
+(8, 'Pak Hadi', '19800108', 'Guru Kelas 4', 8),
+(9, 'Ibu Indah', '19800109', 'Guru Kelas 5', 9),
+(10, 'Pak Joko', '19800110', 'Guru Kelas 5', 10),
+(11, 'Ibu Kiki', '19800111', 'Guru Kelas 6', 11),
+(12, 'Pak Leman', '19800112', 'Guru Kelas 6', 12),
+-- Guru Mapel Khusus (Bukan Wali Kelas)
+(13, 'Pak Ust. Maulana', '19900201', 'Pendidikan Agama Islam', NULL),
+(14, 'Pak Raga', '19900202', 'PJOK (Olahraga)', NULL),
+(15, 'Miss Sarah', '19900203', 'Bahasa Inggris', NULL),
+(16, 'Pak Seni', '19900204', 'Seni Budaya', NULL);
 
 --
 -- Data untuk tabel `murid` (20 data)
 -- Kita sebar 20 murid ini ke 20 kelas yang ada (1 murid per kelas)
 --
 INSERT INTO murid (murid_id, nama_murid, nis, alamat, kelas_id) VALUES
-(1, 'Agung Saputra', '1001', 'Jl. Merdeka No. 1, Jakarta', 1),
-(2, 'Bayu Prakoso', '1002', 'Jl. Sudirman No. 2, Bandung', 2),
-(3, 'Citra Lestari', '1003', 'Jl. Diponegoro No. 3, Surabaya', 3),
-(4, 'Dito Anggoro', '1004', 'Jl. Gajah Mada No. 4, Semarang', 4),
-(5, 'Elang Perkasa', '1005', 'Jl. Pahlawan No. 5, Yogyakarta', 5),
-(6, 'Fani Mutiara', '1006', 'Jl. Kartini No. 6, Medan', 6),
-(7, 'Gilang Ramadhan', '1007', 'Jl. Imam Bonjol No. 7, Makassar', 7),
-(8, 'Hana Pertiwi', '1008', 'Jl. Pattimura No. 8, Palembang', 8),
-(9, 'Ilham Kurniawan', '1009', 'Jl. Teuku Umar No. 9, Bali', 9),
-(10, 'Jihan Nabila', '1010', 'Jl. Gatot Subroto No. 10, Balikpapan', 10),
-(11, 'Kania Dewi', '1011', 'Jl. A. Yani No. 11, Malang', 11),
-(12, 'Lutfi Hakim', '1012', 'Jl. Siliwangi No. 12, Bogor', 12),
-(13, 'Mita Arsita', '1013', 'Jl. Hasanuddin No. 13, Padang', 13),
-(14, 'Nabil Hidayat', '1014', 'Jl. Soekarno Hatta No. 14, Pekanbaru', 14),
-(15, 'Oki Setiawan', '1015', 'Jl. Thamrin No. 15, Lampung', 15),
-(16, 'Pratiwi Wulandari', '1016', 'Jl. Asia Afrika No. 16, Manado', 16),
-(17, 'Qia Ramadhani', '1017', 'Jl. Veteran No. 17, Samarinda', 17),
-(18, 'Rian Hidayat', '1018', 'Jl. Cendrawasih No. 18, Jayapura', 18),
-(19, 'Siska Amelia', '1019', 'Jl. Kenari No. 19, Pontianak', 19),
-(20, 'Tedi Firmansyah', '1020', 'Jl. Merpati No. 20, Ambon', 20);
+(1, 'Adit Sopo', 'SD001', 'Jl. Mawar No 1', 1),
+(2, 'Bagas Drago', 'SD002', 'Jl. Melati No 2', 1),
+(3, 'Cinta Laura', 'SD003', 'Jl. Anggrek No 3', 2),
+(4, 'Denis Kancil', 'SD004', 'Jl. Kenanga No 4', 2),
+(5, 'Euis Sunda', 'SD005', 'Jl. Dahlia No 5', 3),
+(6, 'Fatin Shidqia', 'SD006', 'Jl. Tulip No 6', 3),
+(7, 'Gempi Nora', 'SD007', 'Jl. Matahari No 7', 4),
+(8, 'Hafiz Quran', 'SD008', 'Jl. Bulan No 8', 4),
+(9, 'Ipin Upin', 'SD009', 'Jl. Bintang No 9', 5),
+(10, 'Jarjit Singh', 'SD010', 'Jl. Pelangi No 10', 5),
+(11, 'Kevin Julio', 'SD011', 'Jl. Awan No 11', 6),
+(12, 'Lesti Kejora', 'SD012', 'Jl. Petir No 12', 6),
+(13, 'Mail Ayam', 'SD013', 'Jl. Hujan No 13', 7),
+(14, 'Nussa Rara', 'SD014', 'Jl. Badai No 14', 8),
+(15, 'Opick Tombo', 'SD015', 'Jl. Langit No 15', 9),
+(16, 'Poo Teletubbies', 'SD016', 'Jl. Rumput No 16', 10),
+(17, 'Qila Qolbu', 'SD017', 'Jl. Embun No 17', 11),
+(18, 'Rara Lida', 'SD018', 'Jl. Asap No 18', 11),
+(19, 'Sule Prikitiw', 'SD019', 'Jl. Kabut No 19', 12),
+(20, 'Tukul Arwana', 'SD020', 'Jl. Danau No 20', 12);
 
 --
 -- Data untuk tabel `jadwal_pelajaran` (20 data)
 -- Kita buat jadwal acak, menghubungkan guru 1-20 dan kelas 1-20
 --
-INSERT INTO jadwal_pelajaran (pelajaran_id, hari, waktu, kelas_id, guru_id) VALUES
-(1, 'Senin', '07:00:00', 1, 1),
-(2, 'Senin', '08:00:00', 2, 2),
-(3, 'Senin', '09:00:00', 3, 3),
-(4, 'Senin', '10:00:00', 4, 4),
-(5, 'Selasa', '07:00:00', 5, 5),
-(6, 'Selasa', '08:00:00', 6, 6),
-(7, 'Selasa', '09:00:00', 7, 7),
-(8, 'Selasa', '10:00:00', 8, 8),
-(9, 'Rabu', '07:00:00', 9, 9),
-(10, 'Rabu', '08:00:00', 10, 10),
-(11, 'Rabu', '09:00:00', 11, 11),
-(12, 'Rabu', '10:00:00', 12, 12),
-(13, 'Kamis', '07:00:00', 13, 13),
-(14, 'Kamis', '08:00:00', 14, 14),
-(15, 'Kamis', '09:00:00', 15, 15),
-(16, 'Kamis', '10:00:00', 16, 16),
-(17, 'Jumat', '07:00:00', 17, 17),
-(18, 'Jumat', '08:00:00', 18, 18),
-(19, 'Jumat', '09:00:00', 19, 19),
-(20, 'Jumat', '10:00:00', 20, 20);
+INSERT INTO jadwal_pelajaran (hari, waktu, kelas_id, guru_id) VALUES
+-- Senin Upacara & Tematik
+('Senin', '07:00:00', 1, 1), -- 1-A dengan Wali Kelasnya
+('Senin', '08:00:00', 2, 2), -- 1-B dengan Wali Kelasnya
+('Senin', '09:00:00', 3, 3), 
+('Senin', '10:00:00', 4, 4),
+-- Selasa PJOK & Agama
+('Selasa', '07:00:00', 5, 14), -- 3-A PJOK
+('Selasa', '08:00:00', 6, 13), -- 3-B Agama
+('Selasa', '09:00:00', 7, 7),  -- 4-A Tematik
+('Selasa', '10:00:00', 8, 8),  -- 4-B Tematik
+-- Rabu Bahasa Inggris & Seni
+('Rabu', '07:00:00', 9, 15),  -- 5-A B.Inggris
+('Rabu', '08:00:00', 10, 16), -- 5-B Seni
+('Rabu', '09:00:00', 11, 11), -- 6-A Tematik
+('Rabu', '10:00:00', 12, 12), -- 6-B Tematik
+-- Kamis Tematik Lanjutan
+('Kamis', '07:00:00', 1, 13), -- 1-A Agama
+('Kamis', '08:00:00', 2, 14), -- 1-B PJOK
+('Kamis', '09:00:00', 3, 15), -- 2-A B.Inggris
+('Kamis', '10:00:00', 4, 16); -- 2-B Seni
+--
 
+
+-- 5. NILAI SISWA (Mapel SD)
 --
--- Data untuk tabel `nilai` (20 data)
--- Setiap murid (1-20) mendapat satu nilai dari guru (1-20)
--- Kolom `subject` diisi berdasarkan `subject` dari `guru_id` yang bersangkutan
---
-INSERT INTO nilai (nilai_id, murid_id, subject, nilai, guru_id) VALUES
-(1, 1, 'Matematika', 85, 1),
-(2, 2, 'Fisika', 90, 2),
-(3, 3, 'Kimia', 78, 3),
-(4, 4, 'Biologi', 88, 4),
-(5, 5, 'Bahasa Indonesia', 92, 5),
-(6, 6, 'Bahasa Inggris', 76, 6),
-(7, 7, 'Sejarah', 80, 7),
-(8, 8, 'Geografi', 85, 8),
-(9, 9, 'Ekonomi', 95, 9),
-(10, 10, 'Sosiologi', 70, 10),
-(11, 11, 'PKN', 77, 11),
-(12, 12, 'Seni Budaya', 83, 12),
-(13, 13, 'Olahraga', 89, 13),
-(14, 14, 'TIK', 91, 14),
-(15, 15, 'Bahasa Arab', 79, 15),
-(16, 16, 'Bahasa Mandarin', 81, 16),
-(17, 17, 'Bahasa Jepang', 87, 17),
-(18, 18, 'Kewirausahaan', 93, 18),
-(19, 19, 'Akuntansi', 75, 19),
-(20, 20, 'Antropologi', 82, 20);
+INSERT INTO nilai (murid_id, subject, nilai, guru_id) VALUES
+(1, 'Tematik Tema 1', 85, 1),
+(2, 'Tematik Tema 1', 80, 2),
+(3, 'Matematika Dasar', 90, 3),
+(4, 'Bahasa Indonesia', 88, 4),
+(5, 'IPA', 75, 5),
+(6, 'IPS', 78, 6),
+(7, 'PKN', 92, 7),
+(8, 'PJOK', 85, 14),
+(9, 'Agama Islam', 95, 13),
+(10, 'Seni Budaya', 82, 16),
+(11, 'Bahasa Inggris', 70, 15),
+(12, 'Matematika', 65, 12), -- Nilai agak kurang :D
+(13, 'Tematik Tema 5', 88, 7),
+(14, 'PJOK', 90, 14),
+(15, 'Agama Islam', 98, 13),
+(16, 'Bahasa Inggris', 60, 15),
+(17, 'Matematika', 100, 11),
+(18, 'IPA', 89, 11),
+(19, 'Bahasa Indonesia', 77, 12),
+(20, 'Seni Budaya', 95, 16);
 
 -- --------------------------------------------------------
 -- TABEL USERS (BARU)

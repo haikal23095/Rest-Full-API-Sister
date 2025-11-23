@@ -4,7 +4,7 @@ const JadwalModel = {
     // 1. GET ALL (Ambil semua jadwal dengan detail nama kelas & guru)
     getAll: async () => {
         const query = `
-            SELECT j.pelajaran_id, j.hari, j.waktu, 
+            SELECT j.pelajaran_id, j.hari, j.waktu, j.kelas_id,
                    k.nama_kelas, k.grade_level,
                    g.nama_guru, g.subject
             FROM jadwal_pelajaran j

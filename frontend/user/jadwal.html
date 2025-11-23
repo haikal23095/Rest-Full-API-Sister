@@ -297,10 +297,19 @@
                 alert("Pilih kelas dulu!");
                 return;
             }
+            console.log("ID Kelas yang dipilih (Dropdown):", selectedKelasId, typeof selectedKelasId);
+            // Cek data pertama dari semua jadwal
+            if (allSchedules.length > 0) {
+                console.log("Contoh Data Jadwal dari API:", allSchedules[0]);
+                console.log("Apakah ada property kelas_id?", allSchedules[0].kelas_id);
+            } else {
+                console.log("Data allSchedules KOSONG! Cek Database.");
+            }
 
             // Filter jadwal hanya untuk kelas yang dipilih
             // (Karena API kita get all, kita filter di sisi frontend)
             const filteredJadwal = allSchedules.filter(item => item.kelas_id == selectedKelasId);
+            console.log("Hasil Filter:", filteredJadwal); // Cek hasil filter
 
             if (filteredJadwal.length === 0) {
                 container.innerHTML = `<div class="col-12 text-center py-5"><h5>Belum ada jadwal untuk kelas ini.</h5></div>`;
