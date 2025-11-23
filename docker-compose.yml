@@ -48,6 +48,20 @@ services:
       database_node:
         condition: service_healthy
 
+  # -------------------------------
+  # NODE 1: FRONTEND USER (BARU!)
+  # -------------------------------
+  frontend_user:
+    build: ./frontend/user # Docker akan build dari folder ini
+    container_name: node1_frontend_user
+    restart: always
+    ports:
+      - "8080:80" # Kita akses di browser via localhost:8080
+    networks:
+      - app_network
+    depends_on:
+      - backend_node # Frontend jalan setelah Backend siap
+
 networks:
   # Ini adalah "Kabel LAN virtual" yang menghubungkan semua Node
   app_network:

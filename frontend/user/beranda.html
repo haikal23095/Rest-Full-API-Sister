@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SD Permata Indah - Beranda</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script>
+        // Cek apakah ada token di localStorage
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("Anda belum login! Silakan login terlebih dahulu.");
+            window.location.href = 'login.html'; // Tendang ke login
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+
+        /* HEADER ATAS */
+        .header-top {
+            background-color: #00498C;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo {
+            height: 85px;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 36px;
+            font-weight: 700;
+            margin-left: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* MENU */
+        .menu-bar {
+            background-color: #0A64C3;
+            padding: 12px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .menu-bar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-bar img {
+            width: 38px;
+        }
+
+        .menu-right {
+            margin-left: auto;
+        }
+
+        /* Dropdown background */
+        .dropdown-menu {
+            background-color: #ffffff !important;
+        }
+
+        /* Warna teks item */
+        .dropdown-item {
+            color: #000 !important;
+            font-weight: 600;
+        }
+
+        /* Item hover */
+        .dropdown-item:hover {
+            background-color: #0A64C3 !important;
+            color: #fff !important;
+        }
+
+
+        /* CONTENT */
+        .content {
+            padding: 40px 40px;
+        }
+
+        .section-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .beranda-img {
+            width: 100%;
+            border-radius: 14px;
+        }
+
+        .text-title {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .content-text {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="header-top">
+        <img src="logo.png" class="header-logo">
+        <div class="header-title">SD PERMATA INDAH</div>
+    </div>
+
+    <!-- MENU -->
+    <div class="menu-bar">
+        <a href="beranda.html">BERANDA</a>
+
+        <div class="dropdown d-inline">
+            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                style="color:white; text-decoration:none;">
+                PROFIL
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="profilguru.html">GURU</a></li>
+                <li><a class="dropdown-item" href="profilsiswa.html">SISWA</a></li>
+            </ul>
+        </div>
+
+        <a href="kelas.html">KELAS</a>
+        <a href="jadwal.html">JADWAL</a>
+
+        <div class="menu-right dropdown">
+            <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" style="text-decoration: none;">
+                <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile Icon" width="38">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><span class="dropdown-item disabled" id="username-display">User</span></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item text-danger" href="#" onclick="handleLogout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <div class="section-title">BERANDA</div>
+
+        <div class="row">
+
+            <!-- GAMBAR -->
+            <div class="col-md-6">
+                <img src="sdn.jpg" class="beranda-img">
+            </div>
+
+            <!-- TEKS -->
+            <div class="col-md-6">
+                <div class="text-title mb-3">Tentang SD Permata Indah</div>
+
+                <p class="content-text">
+                    SD Permata Indah merupakan sekolah dasar yang berkomitmen untuk menghadirkan lingkungan belajar yang
+                    nyaman, aman, dan berkarakter. Sekolah ini menjadi tempat tumbuhnya generasi yang cerdas, disiplin,
+                    serta memiliki kepribadian yang baik.
+                </p>
+
+                <p class="content-text">
+                    Fasilitas yang memadai, tenaga pendidik profesional, serta kegiatan pembelajaran yang aktif dan
+                    kreatif menjadi keunggulan tersendiri bagi SD Permata Indah. Sekolah ini tidak hanya fokus pada
+                    peningkatan akademik, tetapi juga menanamkan nilai moral, kedisiplinan, dan kerja sama sejak dini.
+                </p>
+
+                <p class="content-text">
+                    Dengan dukungan guru, orang tua, dan lingkungan yang positif, SD Permata Indah terus berupaya
+                    membimbing para siswa agar menjadi pribadi yang berkarakter, berprestasi, serta mampu menghadapi
+                    perkembangan zaman.
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 1. Tampilkan nama user yang sedang login
+        const userData = JSON.parse(localStorage.getItem('user'));
+        if (userData && userData.username) {
+            document.getElementById('username-display').innerText = "Hi, " + userData.username;
+        }
+
+        // 2. Fungsi Logout
+        function handleLogout() {
+            if (confirm("Apakah Anda yakin ingin keluar?")) {
+                localStorage.removeItem('token'); // Hapus token
+                localStorage.removeItem('user');  // Hapus data user
+                window.location.href = 'login.html'; // Balik ke login
+            }
+        }
+    </script>
+</body>
+
+</html>

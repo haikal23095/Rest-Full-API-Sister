@@ -42,6 +42,14 @@ A full-stack RESTful API application for managing school data including students
 - bcryptjs (password hashing)
 - CORS
 
+**Frontend:**
+
+- HTML5
+- CSS3
+- Bootstrap 5.3.3
+- JavaScript (Vanilla)
+- Bootstrap Icons
+
 **DevOps:**
 
 - Docker & Docker Compose
@@ -81,6 +89,14 @@ code/
 ├── database/
 │   └── init.sql                 # Database initialization script
 ├── frontend/
+│   └── user/
+│       ├── beranda.html         # Homepage
+│       ├── kelas.html           # Classes page
+│       ├── jadwal.html          # Schedule page
+│       ├── profilguru.html      # Teachers profile page
+│       ├── profilsiswa.html     # Students profile page
+│       ├── style-jadwal.css     # Schedule page styles
+│       └── logo.png             # School logo
 ├── docker-compose.yml
 └── Readme.md
 ```
@@ -450,6 +466,64 @@ Server will run on port 3000.
   "message": "Error message"
 }
 ```
+
+## 🎨 Frontend Pages
+
+The project includes a complete frontend interface for users to interact with the system:
+
+### Available Pages
+
+1. **Beranda (Homepage)** - `beranda.html`
+
+   - School information and introduction
+   - Navigation to all sections
+
+2. **Profil Guru (Teachers Profile)** - `profilguru.html`
+
+   - List of all teachers
+   - Teacher details with search functionality
+   - Display: Name, NIS, Gender, Birth date, Year joined
+
+3. **Profil Siswa (Students Profile)** - `profilsiswa.html`
+
+   - List of all students
+   - Student details with search functionality
+   - Display: Name, NIS, Gender, Birth date, Year joined
+
+4. **Kelas (Classes)** - `kelas.html`
+
+   - Class information by grade and major
+   - Homeroom teacher (Wali Kelas) details
+   - Filter by class and major/subject
+
+5. **Jadwal (Schedule)** - `jadwal.html`
+   - Weekly class schedule
+   - Filter by class
+   - Shows subjects for each day (Monday-Friday)
+
+### Frontend Features
+
+- **Responsive Design**: Built with Bootstrap 5.3.3 for mobile-friendly layouts
+- **Consistent Navigation**: All pages share the same header and menu bar
+- **Interactive Dropdowns**: Profile menu with Guru and Siswa options
+- **Search Functionality**: Search and filter features on relevant pages
+- **Clean UI**: Professional design with school branding (logo and colors)
+
+### Accessing the Frontend
+
+To view the frontend, simply open any HTML file in a web browser:
+
+```bash
+# Navigate to frontend directory
+cd frontend/user
+
+# Open in default browser (Windows)
+start beranda.html
+
+# Or open directly in your browser
+```
+
+> **Note**: The frontend currently uses static data. To connect with the backend API, JavaScript fetch calls need to be implemented to retrieve data from the endpoints listed in the API Endpoints section.
 
 ## 🤝 Contributing
 
