@@ -6,12 +6,29 @@ const kelasController = require('../controllers/kelasController');
 const guruController = require('../controllers/guruController');
 const muridController = require('../controllers/muridController');
 const nilaiController = require('../controllers/nilaiController');
+const userController = require('../controllers/userController');
 
 const verifyToken = require('../middlewares/authMiddleware');
 const { onlyAdmin } = require('../middlewares/roleMiddleware');
 
 // Semua route di sini diproteksi oleh verifyToken
 router.get('/dashboard-stats', verifyToken, dashboardController.getStats);
+
+// ==========================================
+// ROUTE: MANAJEMEN USER (KHUSUS ADMIN)
+// ==========================================
+// Ini endpoint untuk Admin membuat user baru (bisa bikin admin lain)
+// atau melihat daftar user. User biasa (Role 2) DILARANG masuk sini.
+
+// 1. Lihat daftar user
+router.get('/users', verifyToken, onlyAdmin, userController.index);
+
+// 2. Buat User Baru (Admin bisa set Role 1 atau 2 disini)
+router.post('/users', verifyToken, onlyAdmin, userController.store);
+
+// 3. Hapus User
+router.delete('/users/:id', verifyToken, onlyAdmin, userController.destroy);
+
 
 // ==========================================
 // CRUD ROUTES (Helper Function biar kodingan rapi)

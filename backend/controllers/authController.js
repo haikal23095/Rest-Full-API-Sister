@@ -5,7 +5,7 @@ const UserModel = require('../models/userModel');
 const JWT_SECRET = process.env.JWT_SECRET || 'rahasia_dapur_sister_project';
 
 exports.register = async (req, res) => {
-    const { username, password, role } = req.body;
+    const { username, password } = req.body;
 
     if (!username || !password) {
         return res.status(400).json({ message: 'Username dan Password wajib diisi!' });
@@ -14,9 +14,9 @@ exports.register = async (req, res) => {
     try {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        const userRole = role === '1' ? '1' : '2';
+        const defaultRole = '2';
 
-        const userId = await UserModel.create(username, hashedPassword, userRole);
+        const userId = await UserModel.create(username, hashedPassword, defaultRole);
 
         res.status(201).json({ message: 'Registrasi Berhasil!', userId });
     } catch (error) {
