@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Admin | Nilai Siswa</title>
+
+    <style>
+        body {
+            background: #ffffff;
+        }
+
+        .btn-tambah {
+            background-color: #d1d1d1;
+            padding: 6px 20px;
+            border-radius: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .btn-hapus {
+            background-color: #cb2222ff;
+            padding: 6px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .table thead th {
+            background-color: #10159eff;
+            color: white;
+            text-align: center;
+        }
+
+        footer {
+            padding: 40px 0;
+            background-color: #f2f2f2;
+            margin-top: 60px;
+        }
+
+        .footer-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .logout-btn {
+            border: 2px solid #d9534f;
+            color: #d9534f;
+            border-radius: 12px;
+            padding: 5px 18px;
+            font-weight: 500;
+            background: transparent;
+            transition: 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #d9534f;
+            color: #fff;
+        }
+
+        .navbar-brand-text {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-light bg-white shadow-sm px-4 py-3">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <span class="navbar-brand-text">ADMIN</span>
+            <a href="#" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+
+    <div class="container mt-5">
+
+        <h3 class="fw-bold mb-4">Nilai Siswa</h3>
+
+        <!-- BUTTONS + SEARCH -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <div>
+                <button class="btn btn-tambah me-2" id="btnTambah">Tambah</button>
+                <button class="btn btn-hapus" id="btnHapus">Hapus</button>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="position-relative">
+                    <input type="text" class="form-control" placeholder="Search" style="padding-right: 30px;">
+                    <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">
+                        🔍
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLE -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width:50px;"><input type="checkbox" id="checkAll"></th>
+                    <th>NO</th>
+                    <th>Nama</th>
+                    <th>Nilai</th>
+                    <th>Mata Pelajaran</th>
+                    <th>Guru Mata Pelajaran</th>
+                </tr>
+            </thead>
+
+            <tbody id="tableBody">
+                <tr>
+                    <td class="text-center"><input type="checkbox" class="row-check"></td>
+                    <td>1</td>
+                    <td>Ahmad Syafiq</td>
+                    <td>80</td>
+                    <td>Matematika</td>
+                    <td>Maulana S. Pd.</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center"><input type="checkbox" class="row-check"></td>
+                    <td>2</td>
+                    <td>Siti Aminah</td>
+                    <td>67</td>
+                    <td>Ilmu Pengetahuan Alam</td>
+                    <td>Haryanto, S. Pd.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <h5 class="footer-title">SD PERMATA INDAH</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="footer-title">MyTeams</h5>
+                    <p>M Haikal Firmansyah</p>
+                    <p>Erlangga Rubai H</p>
+                    <p>Ahmad Zaki</p>
+                    <p>Elvita Dian Prameswari</p>
+                    <p>Ahmad Syafiq A</p>
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="footer-title">CONTACT US</h5>
+                    <p>Address: Jl Telang, Kamal, Bangkalan</p>
+                    <p>Tel: +62 85648475948</p>
+                    <p>Mail: firmansyahhaikal86@gmail.com</p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- SCRIPT -->
+    <script>
+        // =========================================
+        // TAMBAH GURU (dengan required validation)
+        // =========================================
+        document.getElementById("btnTambah").addEventListener("click", async function () {
+
+            const { value: data } = await Swal.fire({
+                title: "Tambah Nilai",
+                html: `
+                    <input id="nama" class="swal2-input" placeholder="Nama" required>
+                    <input id="nilai" class="swal2-input" placeholder="NILAI" required>
+                    <input id="matapelajaran" class="swal2-input" placeholder="MATA PELAJARAN" required>
+                `,
+                focusConfirm: false,
+                confirmButtonText: "Tambah",
+                preConfirm: () => {
+
+                    let nama = document.getElementById("nama").value.trim();
+                    let nilai = document.getElementById("nilai").value.trim();
+                    let matapelajaran = document.getElementById("matapelajaran").value.trim();
+
+                    // VALIDASI REQUIRED
+                    if (!nama || !nilai || !matapelajaran) {
+                        Swal.showValidationMessage("Semua form wajib diisi!");
+                        return false;
+                    }
+
+                    return { nama, nilai, matapelajaran };
+                }
+            });
+
+            if (data) {
+                const table = document.getElementById("tableBody");
+
+                const newRow = `
+                    <tr>
+                        <td class="text-center"><input type="checkbox" class="row-check"></td>
+                        <td>${table.rows.length + 1}</td>
+                        <td>${data.nama}</td>
+                        <td>${data.nilai}</td>
+                        <td>${data.matapelajaran}</td>
+                    </tr>
+                `;
+
+                table.insertAdjacentHTML("beforeend", newRow);
+
+                Swal.fire({
+                    title: "Berhasil!",
+                    text: "Nilai siswa berhasil ditambahkan",
+                    icon: "success",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        });
+
+
+        // =========================================
+        // CHECK ALL
+        // =========================================
+        document.getElementById("checkAll").addEventListener("change", function () {
+            document.querySelectorAll(".row-check").forEach(c => c.checked = this.checked);
+        });
+
+
+        // =========================================
+        // HAPUS DATA
+        // =========================================
+        document.getElementById("btnHapus").addEventListener("click", function () {
+
+            const checkedRows = document.querySelectorAll(".row-check:checked");
+
+            if (checkedRows.length === 0) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Tidak ada data!",
+                    text: "Pilih minimal satu nilai untuk dihapus."
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: "Hapus Data?",
+                text: `Menghapus ${checkedRows.length} guru.`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Hapus",
+                cancelButtonText: "Batal",
+                confirmButtonColor: "#d33"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    checkedRows.forEach(chk => chk.closest("tr").remove());
+
+                    // UPDATE NOMOR
+                    const rows = document.querySelectorAll("#tableBody tr");
+                    let n = 1;
+                    rows.forEach(r => r.children[1].innerText = n++);
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Data dihapus!",
+                        timer: 1200,
+                        showConfirmButton: false
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
